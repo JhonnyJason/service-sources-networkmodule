@@ -15,9 +15,10 @@ fetch = require("node-fetch").default
 ############################################################
 cfg = null
 auth = null
+authCode = "deadbeef"
 
 ############################################################
-networkmodule.initialize = () ->
+networkmodule.initialize = ->
     log "networkmodule.initialize"
     cfg = allModules.configmodule
     auth = allModules.authmodule
@@ -47,8 +48,8 @@ networkmodule.getTickers = (exchange, assetPairs)->
     assetPairs = cfg[exchange].assetPairs unless assetPairs?
     assetPairs = [assetPairs] unless Array.isArray(assetPairs)
 
-    requestURL = cfg[exchange].observerURL + "/getLatestTicker"
-    data = {assetPairs}
+    requestURL = cfg[exchange].observerURL + "/getLatestTickers"
+    data = {authCode, assetPairs}
     return postData(requestURL, data)
 
 networkmodule.getBalances = (exchange, assets)->
@@ -58,8 +59,8 @@ networkmodule.getBalances = (exchange, assets)->
     assets = cfg[exchange].assets unless assets?
     assets = [assets] unless Array.isArray(assets)
 
-    requestURL = cfg[exchange].observerURL + "/getLatestBalance"
-    data = {assets}
+    requestURL = cfg[exchange].observerURL + "/getLatestBalances"
+    data = {authCode, assets}
     return postData(requestURL, data)
 
 networkmodule.getOrders = (exchange, assetPairs)->
@@ -70,7 +71,7 @@ networkmodule.getOrders = (exchange, assetPairs)->
     assetPairs = [assetPairs] unless Array.isArray(assetPairs)
 
     requestURL = cfg[exchange].observerURL + "/getLatestOrders"
-    data = {assetPairs}
+    data = {authCode, assetPairs}
     return postData(requestURL, data)
 
 
