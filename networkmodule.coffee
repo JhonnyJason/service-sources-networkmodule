@@ -53,7 +53,7 @@ networkmodule.getTickers = (exchange, assetPairs)->
     return postData(requestURL, data)
 
 networkmodule.getBalances = (exchange, assets)->
-    log "networkmodule.getBinanceBalances"
+    log "networkmodule.getBalances"
 
     throw new Error("Exchange does not exist") unless cfg[exchange]?
     assets = cfg[exchange].assets unless assets?
@@ -64,7 +64,7 @@ networkmodule.getBalances = (exchange, assets)->
     return postData(requestURL, data)
 
 networkmodule.getOrders = (exchange, assetPairs)->
-    log "networkmodule.getBinanceTickers"
+    log "networkmodule.getOrders"
 
     throw new Error("Exchange does not exist") unless cfg[exchange]?
     assetPairs = cfg[exchange].assetPairs unless assetPairs?
